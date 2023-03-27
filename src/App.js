@@ -27,10 +27,23 @@ function App() {
   //   type === 'multiply' && setCounter(counter * inputHandler)
   // }
     const counterFuncInput = (type) => {
-      type === 'add' && setCounter(counter+inputHandler)
-      type === 'sub' && setCounter(counter-inputHandler)
-      type === 'divide' && setCounter(counter / inputHandler)
-      type === 'multiply' && setCounter(counter * inputHandler)
+      switch (type) {
+        case 'add':
+          setCounter(counter+inputHandler)
+          break;
+        case 'sub':
+          setCounter(counter-inputHandler)
+          break;
+        case 'divide':
+          setCounter(counter / inputHandler)
+          break;
+        case 'multiply':
+          setCounter(counter * inputHandler)
+          break;
+        default:
+          alert("Not a Math function")
+          break;
+      }
     }
 
 
@@ -38,6 +51,7 @@ function App() {
   return (
     <div className="App App-header">
       <h1>Counter: {counter}</h1>
+      <button onClick={() => setCounter(0)}>Reset</button>
       {/* <button onClick={counterFuncAdd}>Add 1</button>
       <button onClick={counterFuncSub}>Subtract 1</button> */}
       <button onClick={() => counterFuncParam('add')}>Add 1</button>
