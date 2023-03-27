@@ -21,7 +21,9 @@ const counterReducer = (counter, action) => {
       case 'Power' :
         return counter ** action.inputHandler
       case 'Remainder':
-        return counter % action.inputHandler 
+        return counter % action.inputHandler
+      case 'RESET':
+        return 0
       default:
         alert("Not a Math function")
         break;
@@ -57,12 +59,12 @@ function App() {
   //   type === 'Divide' && setCounter(counter / inputHandler)
   //   type === 'Multiply' && setCounter(counter * inputHandler)
   // }
-    const counterFuncInput = (type) => {
-      dispatch({
-        type: type,
-        inputHandler: inputHandler
-      })
-    }
+    // const counterFuncInput = (type) => {
+    //   dispatch({
+    //     type: type,
+    //     inputHandler: inputHandler
+    //   })
+    // }
 
 
 
@@ -70,14 +72,21 @@ function App() {
     <div className="App App-header">
       <h1>Counter: {counter}</h1>
       {/* <button onClick={() => setCounter(0)}>Reset</button> */}
+      <button onClick={() => 
+        dispatch({
+          type: 'RESET'
+        })
+        }>Reset</button> 
       {/* 
       <button onClick={counterFuncAdd}>Add 1</button>
       <button onClick={counterFuncSubtract}>Subtracttract 1</button> 
       */}
-      {/* <button onClick={() => counterFuncParam('Add')}>Add 1</button>
+      {/* 
+      <button onClick={() => counterFuncParam('Add')}>Add 1</button>
       <button onClick={() => counterFuncParam('Subtract')}>Subtracttract 1</button>
       <button onClick={() => counterFuncParam('Divide')}>Divide by 2</button>
-      <button onClick={() => counterFuncParam('Multiply')}>Multiply by 2</button> */}
+      <button onClick={() => counterFuncParam('Multiply')}>Multiply by 2</button> 
+      */}
       <p>--------------------------------------------------------------------</p>
       <input type='number' 
         onChange={(e)=>setInputHandler(parseInt(e.target.value))} 
@@ -91,7 +100,13 @@ function App() {
       {
         mathArr.map((expression) => {
           return (
-            <button onClick={() => counterFuncInput(expression)}>
+            // <button onClick={() => counterFuncInput(expression)}>
+            <button onClick={() =>
+              dispatch({
+              type: expression,
+              inputHandler: inputHandler
+              })
+            }>
               {expression}
               {
                 expression === 'Decrement' ? 
