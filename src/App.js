@@ -22,8 +22,12 @@ const counterReducer = (counter, action) => {
         return counter ** action.inputHandler
       case 'Remainder':
         return counter % action.inputHandler
+      case 'Square Root':
+        return Math.sqrt(counter)
       case 'RESET':
         return 0
+      case 42:
+        return 42
       default:
         alert("Not a Math function")
         break;
@@ -38,7 +42,7 @@ function App() {
   const [counter, dispatch] = useReducer( counterReducer, initialCounter )
   const [inputHandler, setInputHandler] = useState(10)
 
-  const mathArr = ['Increment', 'Decrement', 'Add','Subtract','Multiply', 'Divide', 'Power', 'Remainder']
+  const mathArr = ['Increment', 'Decrement', 'Add','Subtract','Multiply', 'Divide', 'Power', 'Remainder', 'Square Root']
   // const counterFuncAdd = () => {
   //   setCounter(counter+1)
   // }
@@ -76,7 +80,14 @@ function App() {
         dispatch({
           type: 'RESET'
         })
-        }>Reset</button> 
+      }>Reset</button> 
+
+
+      {/* not in the map
+      Button 'The Ultimate Answer'
+      Counter = 42 */}
+      <button onClick={() => dispatch({type: 42})}>The Ultimate Answer</button>
+
       {/* 
       <button onClick={counterFuncAdd}>Add 1</button>
       <button onClick={counterFuncSubtract}>Subtracttract 1</button> 
@@ -92,6 +103,7 @@ function App() {
         onChange={(e)=>setInputHandler(parseInt(e.target.value))} 
         value={inputHandler}
       />
+
       {/* 
       <button onClick={() => counterFuncInput('Add')}>Add {inputHandler}</button>
       <button onClick={() => counterFuncInput('Subtract')}>Subtracttract {inputHandler}</button>
@@ -115,9 +127,18 @@ function App() {
                 expression === 'Increment' ? 
                 '++' 
                 :
+                expression === 'Square Root'?
+                ''
+                :
                 ' ' + inputHandler
               }
               </button>
+              // in the map 
+              // Button 'Square Root'
+              // Counter = square root the counter
+              
+
+
           )
         })
       }
